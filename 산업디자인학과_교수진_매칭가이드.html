@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>산업디자인학과 교수진 매칭 가이드</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans CJK KR", "Pretendard", -apple-system, sans-serif;
+    background: linear-gradient(180deg, #f3f6fb 0%, #ffffff 200px);
+    color: #1a1a1a;
+    line-height: 1.6;
+    word-break: keep-all;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* Header */
+  .header { margin-bottom: 32px; }
+  .brand { color: #1565C0; font-weight: 700; font-size: 14pt; letter-spacing: -0.3px; }
+  .dept { color: #6b7280; font-size: 11pt; margin-top: 4px; }
+  h1 {
+    margin-top: 20px; font-size: 36pt; font-weight: 900;
+    letter-spacing: -1.2px; line-height: 1.15;
+  }
+  .subtitle { color: #1565C0; font-weight: 700; font-size: 14pt; margin-top: 6px; }
+  .intro {
+    margin-top: 24px; padding: 18px 22px;
+    background: #f3f5f9; border-left: 4px solid #1e3a8a;
+    border-radius: 6px; font-size: 11pt;
+  }
+
+  /* Filter section */
+  .filter-section { margin-top: 36px; }
+  .filter-title {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .filter-title h2 {
+    font-size: 16pt; font-weight: 800; white-space: nowrap;
+  }
+  .filter-title .rule { flex: 1; height: 1px; background: #d1d5db; }
+  .filter-hint { font-size: 10pt; color: #6b7280; margin-bottom: 16px; }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .category {
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .category:hover {
+    border-color: #1565C0;
+    box-shadow: 0 2px 8px rgba(21,101,192,0.08);
+  }
+  .category.active {
+    border-color: #1565C0;
+    background: #e7eff9;
+  }
+  .category-icon { font-size: 18pt; margin-bottom: 4px; }
+  .category-label {
+    font-weight: 700; font-size: 11pt; color: #111;
+  }
+  .category-desc {
+    font-size: 9pt; color: #6b7280; margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  .filter-actions {
+    margin-top: 14px;
+    display: flex; gap: 10px; align-items: center;
+    font-size: 10pt; color: #6b7280;
+  }
+  .reset-btn {
+    background: none; border: none; color: #1565C0; font-size: 10pt;
+    cursor: pointer; font-weight: 600; padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .reset-btn:hover { background: #e7eff9; }
+
+  /* Professor grid */
+  .prof-section { margin-top: 40px; }
+  .prof-count {
+    margin-bottom: 16px; color: #6b7280; font-size: 10.5pt;
+  }
+  .prof-count strong { color: #1565C0; font-weight: 700; }
+
+  .prof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 14px;
+  }
+  .prof-card {
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 1;
+    position: relative;
+  }
+  .prof-card:hover {
+    border-color: #1565C0;
+    box-shadow: 0 4px 16px rgba(21,101,192,0.12);
+    transform: translateY(-2px);
+  }
+  .prof-card.matched {
+    border-color: #1565C0;
+    background: linear-gradient(180deg, #eef4fc 0%, #ffffff 50%);
+  }
+  .prof-card.dimmed {
+    opacity: 0.35;
+  }
+  .match-badge {
+    position: absolute; top: 14px; right: 14px;
+    background: #1565C0; color: white;
+    font-size: 8.5pt; font-weight: 600;
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .prof-card-header {
+    display: flex; align-items: baseline; gap: 10px;
+    margin-bottom: 8px;
+  }
+  .prof-card-name {
+    font-size: 18pt; font-weight: 800; letter-spacing: -0.5px;
+  }
+  .prof-card-major {
+    font-size: 10.5pt; color: #1565C0; font-weight: 600;
+  }
+  .prof-card-tagline {
+    font-size: 10.5pt; color: #374151; line-height: 1.55;
+    min-height: 50px; margin-bottom: 14px;
+  }
+  .prof-card-keywords {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px;
+  }
+  .keyword {
+    font-size: 8.5pt; padding: 3px 8px;
+    background: #e7eff9; color: #1565C0;
+    border-radius: 4px; font-weight: 500;
+  }
+  .keyword.highlighted {
+    background: #1565C0; color: white;
+  }
+  .prof-card-meta {
+    font-size: 9.5pt; color: #6b7280;
+    padding-top: 12px;
+    border-top: 1px solid #f3f4f6;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .view-detail {
+    color: #1565C0; font-weight: 600; font-size: 9.5pt;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(17, 24, 39, 0.6);
+    z-index: 1000;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 40px 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 14px;
+    max-width: 720px;
+    width: 100%;
+    padding: 32px 36px 28px;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 18px; right: 22px;
+    background: none; border: none; font-size: 24pt; cursor: pointer;
+    color: #6b7280; line-height: 1;
+  }
+  .modal-close:hover { color: #111; }
+  .modal-name {
+    font-size: 26pt; font-weight: 900; letter-spacing: -0.8px;
+  }
+  .modal-major {
+    color: #1565C0; font-weight: 700; font-size: 13pt; margin-top: 4px;
+  }
+  .modal-tagline {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: #f3f5f9;
+    border-left: 3px solid #1565C0;
+    border-radius: 4px;
+    font-size: 11pt;
+    color: #2a2a2a;
+  }
+  .modal-section { margin-top: 22px; }
+  .modal-section h3 {
+    font-size: 11pt; color: #6b7280; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .modal-section p, .modal-section ul {
+    font-size: 11pt; line-height: 1.65; color: #1a1a1a;
+  }
+  .modal-section ul { list-style: none; padding-left: 0; }
+  .modal-section li {
+    padding: 4px 0 4px 16px; position: relative;
+  }
+  .modal-section li::before {
+    content: "▸"; position: absolute; left: 0;
+    color: #1565C0; font-size: 9pt;
+  }
+  .modal-lab {
+    margin-top: 22px;
+    padding: 14px 18px;
+    background: #eef4fc;
+    border-radius: 8px;
+  }
+  .modal-lab .lab-name {
+    font-weight: 700; color: #1565C0; font-size: 11pt;
+  }
+  .modal-lab .lab-summary {
+    margin-top: 6px; font-size: 10.5pt; color: #2a2a2a; line-height: 1.6;
+  }
+  .modal-contact {
+    margin-top: 22px; padding-top: 18px;
+    border-top: 1px solid #e5e7eb;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    font-size: 10.5pt;
+  }
+  .modal-contact-item { color: #4b5563; }
+  .modal-contact-item b { color: #111; font-weight: 600; }
+  .modal-link {
+    display: inline-block; margin-top: 14px;
+    padding: 8px 14px;
+    background: #1565C0; color: white;
+    text-decoration: none; border-radius: 6px;
+    font-size: 10pt; font-weight: 600;
+  }
+  .modal-link:hover { background: #0d4ea0; }
+
+  /* Footer */
+  .footer {
+    margin-top: 60px; padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 9.5pt; color: #9ca3af;
+    text-align: center; line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 28pt; }
+    .modal { padding: 24px 22px; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .prof-grid { grid-template-columns: 1fr; }
+    .modal-contact { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- PDF Download button ---------- */
+  .download-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #1565C0;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 11pt;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+    transition: background 0.2s, transform 0.1s;
+  }
+  .download-btn:hover { background: #0d4ea0; }
+  .download-btn:active { transform: translateY(1px); }
+  .download-btn svg { width: 16px; height: 16px; }
+
+  /* ---------- Print-only details (hidden on screen) ---------- */
+  .print-details { display: none; }
+
+  /* ---------- Print styles ---------- */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 18mm 16mm;
+    }
+    body {
+      background: white !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .container { padding: 0; max-width: 100%; }
+
+    /* Hide interactive controls */
+    .download-btn,
+    .filter-section,
+    .modal-overlay,
+    .view-detail { display: none !important; }
+
+    /* Make header more compact */
+    .header { margin-bottom: 16px; }
+    h1 { font-size: 28pt; }
+    .subtitle { font-size: 12pt; }
+    .intro { margin-top: 16px; font-size: 10pt; padding: 12px 16px; }
+
+    /* Reset prof card grid to vertical full-width for detailed view */
+    .prof-section { margin-top: 24px; }
+    .prof-grid {
+      display: block !important;
+    }
+    .prof-card {
+      cursor: default !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      margin-bottom: 14px;
+      box-shadow: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      border-color: #cbd5e1 !important;
+      background: white !important;
+    }
+    .prof-card.dimmed { opacity: 1 !important; }
+    .match-badge { display: none; }
+
+    /* Show expanded details when printing */
+    .print-details {
+      display: block !important;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #f3f4f6;
+    }
+    .print-details .pd-section {
+      margin-top: 8px;
+    }
+    .print-details .pd-label {
+      font-size: 8pt;
+      color: #6b7280;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 3px;
+    }
+    .print-details .pd-content {
+      font-size: 9.5pt;
+      line-height: 1.55;
+      color: #1a1a1a;
+    }
+    .print-details ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .print-details li {
+      padding: 2px 0 2px 12px;
+      position: relative;
+      font-size: 9pt;
+      line-height: 1.5;
+    }
+    .print-details li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #1565C0;
+      font-size: 8pt;
+    }
+    .print-details .pd-lab {
+      background: #f0f5fb;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+    .print-details .pd-lab-name {
+      font-weight: 700;
+      color: #1565C0;
+      font-size: 9.5pt;
+      margin-bottom: 3px;
+    }
+    .print-details .pd-lab-summary {
+      font-size: 9pt;
+      color: #2a2a2a;
+      line-height: 1.5;
+    }
+    .prof-card-tagline { min-height: auto; margin-bottom: 8px; font-size: 10pt; }
+    .prof-card-keywords { margin-bottom: 8px; }
+    .prof-card-meta {
+      display: none;
+    }
+
+    /* Page break control */
+    .footer {
+      page-break-before: avoid;
+      margin-top: 30px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<button class="download-btn" onclick="window.print()" aria-label="PDF 다운로드">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  PDF 다운로드
+</button>
+
+<div class="container">
+  <div class="header">
+    <div class="brand">SEOULTECH 서울과학기술대학교</div>
+    <div class="dept">일반대학원 산업디자인학과 (Department of Industrial Design)</div>
+    <h1>관심분야로 찾는<br>나의 지도교수</h1>
+    <div class="subtitle">Find Your Advisor by Research Interest</div>
+    <div class="intro">
+      8명 교수님의 연구 분야와 키워드를 정리했습니다. 본인의 관심 키워드를 선택하면 가장 잘 맞는 교수님이 강조됩니다. <b>여러 개를 동시에 선택할 수 있습니다.</b> 카드를 클릭하면 상세 프로필이 열립니다.
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <div class="filter-title">
+      <h2>관심 분야 선택</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="filter-hint">아래 분야 중 본인이 관심 있는 것을 모두 선택해 보세요. (중복 선택 가능)</div>
+    <div class="category-grid" id="categoryGrid"></div>
+    <div class="filter-actions">
+      <span id="selectedInfo">선택된 분야 없음 — 모든 교수님이 표시됩니다</span>
+      <button class="reset-btn" onclick="resetFilters()">초기화</button>
+    </div>
+  </div>
+
+  <div class="prof-section">
+    <div class="filter-title">
+      <h2>교수진 소개</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="prof-count" id="profCount">8명의 교수님</div>
+    <div class="prof-grid" id="profGrid"></div>
+  </div>
+
+  <div class="footer">
+    출처: 서울과학기술대학교 일반대학원 산업디자인학과 (gsp.seoultech.ac.kr) · 2026년 5월 기준<br>
+    BEAR+ 프로그램 예비대학원생 설명회 참고 자료
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+const professors = [
+  {
+    id: "02403", name: "이상진", major: "제품 환경 디자인",
+    tel: "02-970-6658", email: "lsj6732@seoultech.ac.kr", office: "다빈치관 532호",
+    profile_url: "https://gsp.seoultech.ac.kr/d_information/f_time/vd/prof_intro?togo=list&menu=9214&profidx=02403",
+    education: "서울대 산업디자인 학·석사 · Domus Academy(이탈리아) 디자인 석사",
+    career: "LG전자 디자인연구소 주임연구원",
+    keywords: ["조명", "LED", "리빙", "공공디자인", "공예 융합", "재료"],
+    lab_name: "S 랩",
+    lab_summary: "LED 제품, 환경·공공디자인, 조명을 비롯한 리빙 프로덕트 디자인. 소재의 특성·조형방법과 행동/경험/직관 기반 디자인 연구.",
+    highlights: [
+      "이탈리아 Domus Academy 디자인 석사",
+      "LG전자 디자인연구소 출신",
+      "전통 짜맞춤+3D 프린팅 의자 디자인 등 공예 융합 연구",
+      "Bookrest Lamp, Lighting Talk 시리즈 등 국제초대전 다수",
+      "갤러리 개인전 다수 (갤러리마크, 누크갤러리 등)"
+    ],
+    tagline: "전통 공예와 디지털 기술의 융합, 일상 공간을 채우는 조명·리빙 제품 연구."
+  },
+  {
+    id: "02404", name: "김원섭", major: "제품 인터랙션 디자인",
+    tel: "02-970-6655", email: "wskim@seoultech.ac.kr", office: "다빈치관 530호",
+    profile_url: "https://gsp.seoultech.ac.kr/d_information/f_time/vd/prof_intro?togo=list&menu=9214&profidx=02404",
+    education: "KAIST 산업디자인 학·석·박사 (공학박사)",
+    career: "현대정공 기술연구소 자동차 디자이너 · 이화여대 전임강사",
+    keywords: ["로봇", "인터랙션", "키네틱", "오토마타", "헬스케어", "유니버설", "프로토타이핑", "생성형 디자인"],
+    lab_name: "로봇 & 인터랙션디자인 랩",
+    lab_summary: "공학적 지식과 창의성 이론을 결합하여 새로운 컨셉을 도출하고 실체적 프로토타이핑으로 구현. 제품 및 서비스 디자인의 사용성 향상.",
+    highlights: [
+      "KAIST 산업디자인 학·석·박사 (공학박사)",
+      "현대정공 자동차 디자이너 출신",
+      "European Product Design Award Top Winner (Swing Washbasin)",
+      "IDA Gold (Add-on Shower)",
+      "디자인 저서 6권 출간 (키네틱플레이, 오토마타 디자이너 등)",
+      "헬스케어 디지털 트윈, 협동로봇 디자인 등 다수 프로젝트"
+    ],
+    tagline: "공학과 디자인의 융합, 움직이는 제품·로봇·인터랙션 분야 연구."
+  },
+  {
+    id: "02435", name: "김상규", major: "제품문화컨텐츠 디자인",
+    tel: "02-970-6744", email: "ksk2010@seoultech.ac.kr", office: "다빈치관 531호",
+    profile_url: "https://gsp.seoultech.ac.kr/d_information/f_time/vd/prof_intro?togo=list&menu=9214&profidx=02435",
+    external_url: "http://kimsangkyu.org/",
+    education: "서울대 산업디자인 학사 · 국민대 공업디자인 석사 · 건국대 산업디자인 박사",
+    career: "한국디자인문화재단 정책연구팀장 · 디자인미술관 큐레이터 · 퍼시스 디자이너",
+    keywords: ["디자인 문화", "비평", "큐레이팅", "아카이브", "가구", "K-디자인", "메이커", "지속가능"],
+    lab_name: "자율디자인랩",
+    lab_summary: "'생각하기와 만들기(Think & Make)'를 디자인의 핵심으로. 한국 디자인, 일상의 사물, 디자인 비평, 디자인문화유산 리서치, 전시 기획.",
+    highlights: [
+      "디자인 미술관 큐레이터 출신 · 한국디자인문화재단 정책연구팀장",
+      "디자인 평론가 - 단독·공저 저서 30권+",
+      "베를린 디자인 탐사, 의자의 세계, 디자인 리더, 사물의 이력 등",
+      "K-디자인·디자인 헤리티지 연구의 선도자",
+      "사회참여 디자인·생태 전환 디자인 연구",
+      "광주디자인비엔날레, 사물학2 등 주요 전시 큐레이팅"
+    ],
+    tagline: "디자인을 비평·아카이브·문화의 관점에서 탐구. 한국 디자인의 역사와 미래를 잇는 연구."
+  },
+  {
+    id: "02478", name: "최정민", major: "제품 UX디자인",
+    tel: "02-970-6652", email: "jmchoi@seoultech.ac.kr", office: "다빈치관 529호",
+    profile_url: "https://gsp.seoultech.ac.kr/d_information/f_time/vd/prof_intro?togo=list&menu=9214&profidx=02478",
+    education: "서울대 산업디자인 학사 · 이대 교육공학 석사 · Illinois Institute of Technology Institute of Design 박사",
+    career: "LG전자 디자인연구소 · 서울대 BK연구교수 · 공주대 산업디자인공학부 조교수",
+    keywords: ["UX", "인터랙션", "AI 에이전트", "음성 인터페이스", "헬스케어", "메타버스", "스마트 스피커", "AR/VR", "IoT"],
+    lab_name: "제품 UX 디자인 랩 (Product UX Design Lab)",
+    lab_summary: "제품·시스템 사용 과정에서 만족스러운 사용자 경험 형성을 핵심 목표로. 사용자 리서치, 제품 UX 디자인 방법론·툴 개발, 협력 프로젝트.",
+    highlights: [
+      "美 IIT Institute of Design 박사 (PhD in Design)",
+      "LG전자 디자인연구소 출신",
+      "AI 기반 헬스케어 UX, 메타버스 플랫폼, 스마트 에이전트 등 최신 분야 연구",
+      "AI 기반 디자이너 작업 지원 도구 연구 (Archives of Design Research)",
+      "한국디자인학회 지도교수상",
+      "당뇨 관리 XR 디지털 트윈, 인지장애 회상요법 앱 등 연구 진행"
+    ],
+    tagline: "AI 시대의 사용자 경험. 스마트 제품·서비스 UX 방법론 연구."
+  },
+  {
+    id: "02555", name: "최웅", major: "제품조형디자인",
+    tel: "02-970-6679", email: "woongchoi@seoultech.ac.kr", office: "다빈치관 528호",
+    profile_url: "https://gsp.seoultech.ac.kr/d_information/f_time/vd/prof_intro?togo=list&menu=9214&profidx=02555",
+    education: "서울대 미대 산업디자인 학·석사 · 영국 Brunel University 통합제품디자인 석사 · 서울대 디자인학 박사",
+    career: "LG전자 디자인연구소 선행디자인팀 (7년) · 한국디자인학회 상임이사",
+    keywords: ["알고리즘 디자인", "패러매트릭", "제너러티브", "3D 프린팅", "CAD", "조형", "유니버설", "디자인 인지"],
+    lab_name: "미래조형디자인 스튜디오 (Future Shape Design Studio)",
+    lab_summary: "근미래 제품과 공간의 새로운 형태를 탐색. 최신 트렌드와 기술 조사 기반의 근미래 사용시나리오 예측, 제품의 심미성·사용경험을 3D CAD로 구현.",
+    highlights: [
+      "서울대 학·석·박사 + 영국 Brunel University 석사",
+      "LG전자 디자인연구소 선행디자인팀 7년 경력",
+      "European Product Design Award Top Winner — Swing Washbasin",
+      "IDA Gold — Add-on Shower",
+      "한국디자인학회 상임이사",
+      "알고리즘·제너러티브 디자인 국내 선도 연구자",
+      "Voronoi Chair, Algorithmic Hexagonal Patterns 등 국제초대전 다수",
+      "산업용 DLP 3D 프린터 디자인 시리즈"
+    ],
+    tagline: "알고리즘·제너러티브 디자인, 3D 프린팅, CAD 기반의 새로운 제품 조형 탐색."
+  },
+  {
+    id: "02616", name: "이영은", major: "제품 리빙 디자인",
+    tel: "02-970-6668", email: "yelee@seoultech.ac.kr", office: "다빈치관 527호",
+    profile_url: "https://gsp.seoultech.ac.kr/d_information/f_time/vd/prof_intro?togo=list&menu=9214&profidx=02616",
+    education: "이대 산업디자인 학사 · Cranbrook Academy of Art(미국) 3D Design 석사 · 서울대 디자인학 박사",
+    career: "현대카드 UX & Design Lab 선임디자이너 (2012-2017) · 홍익대 디자인컨버전스학부 조교수",
+    keywords: ["리빙", "가구", "VR 조형", "친환경", "공예", "테이블", "선반"],
+    lab_name: "Living Design Studio",
+    lab_summary: "일상과 밀접한 제품, 가구, 소품에 이르기까지 디자인으로 긍정적 변화를 이끌 수 있는 활동을 지향.",
+    highlights: [
+      "美 Cranbrook Academy of Art 3D Design 석사",
+      "현대카드 UX & Design Lab 선임디자이너 5년",
+      "IDEA Awards Bronze 수상",
+      "VR(가상현실)을 활용한 입체조형 교육 방법론 개발",
+      "Design with Hand 등 가구 디자인 개인전",
+      "친환경 컵 공유 서비스(OU Cup) 등 사회혁신 디자인",
+      "Ladder Shelf, Bent Bookstand 등 국제초대전 다수"
+    ],
+    tagline: "일상의 가구·리빙 제품, VR 활용 입체조형, 친환경 디자인 연구."
+  },
+  {
+    id: "02715", name: "민찬욱", major: "뉴미디어디자인",
+    tel: "02-970-6444", email: "chanwook.min@seoultech.ac.kr", office: "어의관 615호",
+    profile_url: "https://gsp.seoultech.ac.kr/d_information/f_time/vd/prof_intro?togo=list&menu=9214&profidx=02715",
+    education: "동국대 전자공학 학사 · 연세대 미디어아트 석사 · NYU ITP(Interactive Telecommunications) 석사",
+    career: "뉴미디어아티스트 · 크리에이티브 테크놀로지스트 · 서울대/연세대/고려대/한예종 강사",
+    keywords: ["뉴미디어", "인터랙티브 아트", "피지컬 컴퓨팅", "디지털 패브리케이션", "AI 디자인", "버추얼 제품", "크리에이티브 코딩"],
+    lab_name: null,
+    lab_summary: "기초프로그래밍, 피지컬컴퓨팅, 디지털패브리케이션, 인공지능디자인, 버추얼제품디자인 등 기술 기반 디자인 교육.",
+    highlights: [
+      "NYU ITP (Interactive Telecommunications Program) 석사 — 세계 최고 뉴미디어 프로그램",
+      "동국대 전자공학 학사 — 공학+예술 융합 배경",
+      "현역 뉴미디어아티스트 / 크리에이티브 테크놀로지스트",
+      "Faces in Motion, Time Object 등 인터랙티브 작품 다수 전시",
+      "기초프로그래밍·피지컬컴퓨팅·인공지능디자인 교과 담당",
+      "상업화랑, 한국기초조형학회 등 작품 전시"
+    ],
+    tagline: "코드·센서·기계로 만드는 뉴미디어 아트와 기술융합 디자인."
+  },
+  {
+    id: "02740", name: "고성찬", major: "제품 AI 디자인",
+    tel: "02-970-6672", email: "sungchan@seoultech.ac.kr", office: "어의관 603호",
+    profile_url: "https://gsp.seoultech.ac.kr/d_information/f_time/vd/prof_intro?togo=list&menu=9214&profidx=02740",
+    education: "국민대 기계자동차공학 학사 · 홍익대 IDAS 스마트디자인엔지니어링 석사",
+    career: "삼성전자 삼성리서치 제품 디자이너 (2010-2026, 16년)",
+    keywords: ["AI 디자인", "생성형 AI", "로봇", "웨어러블", "스마트 제품", "삼성 제품", "산업디자인"],
+    lab_name: null,
+    lab_summary: "생성형 AI 기술 발전과 디자인 워크숍의 변화 연구. 인공지능디자인·제품 CAD 교과 담당.",
+    highlights: [
+      "삼성전자 삼성리서치 16년 경력 (2010-2026) — 8명 중 가장 최근 산업현장 경험",
+      "2025 대한민국디자인전람회 대통령상",
+      "2025 Red Dot Award: Design Concept Winner",
+      "2024 삼성전자 Best Design Awards 대상",
+      "한국디자인학회 기업분과 이사 / 디자인융복합학회 교육분과 이사",
+      "한국산업기술기획평가원 AI 자문위원",
+      "특허·디자인권 25건+ (US 등록 다수)",
+      "웨어러블 피트니스 기기 IROS 2023 발표"
+    ],
+    tagline: "삼성리서치 16년 산업현장 경험 + 생성형 AI·로봇 디자인의 최전선."
+  }
+];
+
+const categories = [
+  { id: "tech", label: "기술·공학 융합", desc: "프로그래밍, 로봇, 키네틱, 피지컬 컴퓨팅",
+    professors: ["02404", "02555", "02715", "02740"], icon: "🤖" },
+  { id: "ux", label: "UX·인터랙션", desc: "사용자 경험, AI 에이전트, 스마트 제품",
+    professors: ["02478", "02404", "02740"], icon: "📱" },
+  { id: "ai", label: "AI·생성형 디자인", desc: "생성형 AI, 알고리즘, AI 디자인 도구",
+    professors: ["02740", "02555", "02478", "02715"], icon: "✨" },
+  { id: "living", label: "리빙·가구", desc: "가구, 조명, 라이프스타일 제품",
+    professors: ["02616", "02403", "02435"], icon: "🪑" },
+  { id: "form", label: "조형·CAD", desc: "패러매트릭, 제너러티브, 3D 조형",
+    professors: ["02555", "02616"], icon: "🎨" },
+  { id: "culture", label: "디자인 문화·이론", desc: "비평, 큐레이팅, 아카이브, 역사",
+    professors: ["02435"], icon: "📚" },
+  { id: "social", label: "사회혁신·유니버설", desc: "유니버설, 친환경, 사회참여",
+    professors: ["02403", "02404", "02555", "02616", "02435"], icon: "♿" },
+  { id: "media", label: "뉴미디어 아트", desc: "인터랙티브 아트, 미디어아트",
+    professors: ["02715"], icon: "💡" },
+  { id: "industry", label: "대기업 산업현장", desc: "LG·삼성·현대·현대카드 디자이너 출신",
+    professors: ["02740", "02555", "02478", "02403", "02616", "02404"], icon: "🏢" }
+];
+
+const selectedCategories = new Set();
+
+// Render categories
+function renderCategories() {
+  const grid = document.getElementById('categoryGrid');
+  grid.innerHTML = categories.map(c => `
+    <div class="category" data-id="${c.id}" onclick="toggleCategory('${c.id}')">
+      <div class="category-icon">${c.icon}</div>
+      <div class="category-label">${c.label}</div>
+      <div class="category-desc">${c.desc}</div>
+    </div>
+  `).join('');
+}
+
+// Render professors
+function renderProfessors() {
+  const grid = document.getElementById('profGrid');
+  const matchedIds = getMatchedProfessorIds();
+
+  grid.innerHTML = professors.map(p => {
+    const isMatched = matchedIds.has(p.id);
+    const isFiltered = selectedCategories.size > 0;
+    const cardClass = !isFiltered ? '' :
+      (isMatched ? 'matched' : 'dimmed');
+
+    // Highlight keywords matching selected categories
+    const highlightedKeywords = getHighlightedKeywords(p);
+
+    return `
+      <div class="prof-card ${cardClass}" onclick="openModal('${p.id}')">
+        ${isMatched && isFiltered ? '<div class="match-badge">매칭</div>' : ''}
+        <div class="prof-card-header">
+          <div class="prof-card-name">${p.name}</div>
+          <div class="prof-card-major">${p.major}</div>
+        </div>
+        <div class="prof-card-tagline">${p.tagline}</div>
+        <div class="prof-card-keywords">
+          ${p.keywords.map(k =>
+            `<span class="keyword ${highlightedKeywords.has(k) ? 'highlighted' : ''}">${k}</span>`
+          ).join('')}
+        </div>
+        <div class="prof-card-meta">
+          <span>📍 ${p.office}</span>
+          <span class="view-detail">자세히 보기 →</span>
+        </div>
+        <div class="print-details">
+          ${p.lab_name ? `
+          <div class="pd-lab">
+            <div class="pd-lab-name">🔬 ${p.lab_name}</div>
+            <div class="pd-lab-summary">${p.lab_summary}</div>
+          </div>` : `
+          <div class="pd-lab">
+            <div class="pd-lab-summary">${p.lab_summary}</div>
+          </div>`}
+          <div class="pd-section">
+            <div class="pd-label">학력</div>
+            <div class="pd-content">${p.education}</div>
+          </div>
+          <div class="pd-section">
+            <div class="pd-label">주요 경력</div>
+            <div class="pd-content">${p.career}</div>
+          </div>
+          <div class="pd-section">
+            <div class="pd-label">주요 성과·이력</div>
+            <ul>${p.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+          </div>
+          <div class="pd-section">
+            <div class="pd-label">연락처</div>
+            <div class="pd-content">📍 ${p.office} · 📞 ${p.tel} · ✉ ${p.email}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Update count
+  if (selectedCategories.size > 0) {
+    document.getElementById('profCount').innerHTML =
+      `선택한 분야와 일치하는 교수님 <strong>${matchedIds.size}명</strong> · 전체 8명 중`;
+  } else {
+    document.getElementById('profCount').innerHTML = '전체 <strong>8명</strong>의 교수님';
+  }
+
+  // Update selected info
+  const info = document.getElementById('selectedInfo');
+  if (selectedCategories.size === 0) {
+    info.textContent = '선택된 분야 없음 — 모든 교수님이 표시됩니다';
+  } else {
+    const labels = [...selectedCategories].map(id =>
+      categories.find(c => c.id === id).label
+    ).join(', ');
+    info.textContent = `선택됨: ${labels}`;
+  }
+}
+
+function getMatchedProfessorIds() {
+  if (selectedCategories.size === 0) {
+    return new Set(professors.map(p => p.id));
+  }
+  const matchedIds = new Set();
+  selectedCategories.forEach(catId => {
+    const cat = categories.find(c => c.id === catId);
+    cat.professors.forEach(pid => matchedIds.add(pid));
+  });
+  return matchedIds;
+}
+
+function getHighlightedKeywords(prof) {
+  if (selectedCategories.size === 0) return new Set();
+  const highlighted = new Set();
+  selectedCategories.forEach(catId => {
+    const cat = categories.find(c => c.id === catId);
+    if (cat.professors.includes(prof.id)) {
+      // Heuristic: highlight all keywords for matched professors
+      prof.keywords.forEach(k => highlighted.add(k));
+    }
+  });
+  return highlighted;
+}
+
+function toggleCategory(id) {
+  if (selectedCategories.has(id)) {
+    selectedCategories.delete(id);
+  } else {
+    selectedCategories.add(id);
+  }
+  document.querySelectorAll('.category').forEach(el => {
+    el.classList.toggle('active', selectedCategories.has(el.dataset.id));
+  });
+  renderProfessors();
+}
+
+function resetFilters() {
+  selectedCategories.clear();
+  document.querySelectorAll('.category').forEach(el => el.classList.remove('active'));
+  renderProfessors();
+}
+
+function openModal(id) {
+  const p = professors.find(p => p.id === id);
+  const externalLink = p.external_url ? `<a class="modal-link" href="${p.external_url}" target="_blank" rel="noopener" style="margin-left:8px; background:#4b5563">개인 사이트 →</a>` : '';
+  const labBlock = p.lab_name ? `
+    <div class="modal-lab">
+      <div class="lab-name">🔬 ${p.lab_name}</div>
+      <div class="lab-summary">${p.lab_summary}</div>
+    </div>` : `
+    <div class="modal-lab">
+      <div class="lab-summary">${p.lab_summary}</div>
+    </div>`;
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-name">${p.name}</div>
+    <div class="modal-major">${p.major}</div>
+    <div class="modal-tagline">${p.tagline}</div>
+
+    ${labBlock}
+
+    <div class="modal-section">
+      <h3>학력</h3>
+      <p>${p.education}</p>
+    </div>
+
+    <div class="modal-section">
+      <h3>주요 경력</h3>
+      <p>${p.career}</p>
+    </div>
+
+    <div class="modal-section">
+      <h3>주요 성과·이력</h3>
+      <ul>${p.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+    </div>
+
+    <div class="modal-section">
+      <h3>연구 키워드</h3>
+      <div class="prof-card-keywords" style="margin-top:0">
+        ${p.keywords.map(k => `<span class="keyword">${k}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="modal-contact">
+      <div class="modal-contact-item"><b>📍 연구실</b><br>${p.office}</div>
+      <div class="modal-contact-item"><b>📞 전화</b><br>${p.tel}</div>
+      <div class="modal-contact-item" style="grid-column: 1 / -1;"><b>✉ 이메일</b><br>
+        <a href="mailto:${p.email}" style="color:#1565C0">${p.email}</a>
+      </div>
+    </div>
+
+    <a class="modal-link" href="${p.profile_url}" target="_blank" rel="noopener">공식 프로필 페이지 →</a>
+    ${externalLink}
+  `;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(event) {
+  if (event && event.target !== document.getElementById('modalOverlay') && event.target.className !== 'modal-close') return;
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Initial render
+renderCategories();
+renderProfessors();
+</script>
+
+</body>
+</html>

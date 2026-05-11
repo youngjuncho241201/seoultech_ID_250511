@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>산업디자인학과 교수진 한눈에 보기</title>
+<style>
+  @page {
+    size: A3 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    font-family: "Noto Sans CJK KR", sans-serif;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    width: 297mm;
+    min-height: 420mm;
+    padding: 25mm 22mm 22mm 22mm;
+    background: linear-gradient(180deg, #f3f6fb 0%, #ffffff 25%);
+    word-break: keep-all;
+  }
+  .brand {
+    font-weight: 700;
+    color: #1565C0;
+    font-size: 16pt;
+    letter-spacing: -0.3px;
+  }
+  .dept {
+    margin-top: 5px;
+    color: #6b7280;
+    font-size: 12pt;
+  }
+  .eyebrow {
+    margin-top: 28px;
+    color: #1565C0;
+    font-weight: 700;
+    font-size: 15pt;
+    letter-spacing: 0.5px;
+  }
+  .title {
+    margin-top: 6px;
+    font-weight: 900;
+    font-size: 44pt;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    color: #111111;
+  }
+  .subtitle {
+    margin-top: 10px;
+    color: #1565C0;
+    font-weight: 700;
+    font-size: 16pt;
+  }
+  .intro {
+    margin-top: 26px;
+    background: #f3f5f9;
+    border-left: 4px solid #1e3a8a;
+    border-radius: 6px;
+    padding: 18px 22px;
+    font-size: 11.5pt;
+    line-height: 1.7;
+    color: #2a2a2a;
+  }
+
+  /* 교수 카드 그리드 (4x2) */
+  .prof-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .prof-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px 18px;
+    page-break-inside: avoid;
+  }
+  .prof-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 12px;
+  }
+  .prof-name {
+    font-size: 17pt;
+    font-weight: 800;
+    color: #111111;
+    letter-spacing: -0.5px;
+  }
+  .prof-major {
+    font-size: 10pt;
+    color: #1565C0;
+    font-weight: 600;
+  }
+  .prof-tagline {
+    font-size: 10pt;
+    color: #374151;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    min-height: 30px;
+  }
+  .prof-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .keyword {
+    font-size: 8pt;
+    padding: 2px 7px;
+    background: #e7eff9;
+    color: #1565C0;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .prof-lab {
+    font-size: 9pt;
+    color: #6b7280;
+    margin-bottom: 8px;
+    padding: 6px 8px;
+    background: #f9fafb;
+    border-radius: 4px;
+  }
+  .prof-lab b {
+    color: #111111;
+    font-weight: 600;
+  }
+  .prof-contact {
+    font-size: 8.5pt;
+    color: #6b7280;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+  .prof-contact .item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* 안내 박스 */
+  .legend {
+    margin-top: 22px;
+    background: #eef4fc;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 10pt;
+    color: #1e3a8a;
+    line-height: 1.6;
+  }
+  .legend b {
+    font-weight: 700;
+  }
+
+  .footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8.5pt;
+    color: #9ca3af;
+  }
+</style>
+</head>
+<body>
+
+  <div class="brand">SEOULTECH 서울과학기술대학교</div>
+  <div class="dept">일반대학원 산업디자인학과 (Department of Industrial Design)</div>
+
+  <div class="eyebrow">예비대학원생을 위한</div>
+  <div class="title">교수진 한눈에 보기</div>
+  <div class="subtitle">Faculty Research Areas at a Glance</div>
+
+  <div class="intro">
+    산업디자인학과는 8명의 교수님이 <b>제품 디자인을 중심으로 조형·UX·인터랙션·문화·뉴미디어·AI까지 폭넓은 스펙트럼</b>의 연구를 진행합니다. 자신의 관심 분야와 가장 잘 맞는 지도교수님을 찾아보세요.
+  </div>
+
+  <div class="prof-grid">
+    <!-- 1. 이상진 -->
+    <div class="prof-card">
+      <div class="prof-header">
+        <div class="prof-name">이상진</div>
+        <div class="prof-major">제품 환경 디자인</div>
+      </div>
+      <div class="prof-tagline">전통 공예와 디지털 기술의 융합, 일상 공간을 채우는 조명·리빙 제품 연구.</div>
+      <div class="prof-keywords">
+        <span class="keyword">조명</span><span class="keyword">LED</span><span class="keyword">리빙</span><span class="keyword">공공디자인</span><span class="keyword">공예 융합</span>
+      </div>
+      <div class="prof-lab"><b>S 랩</b> · LED 제품·환경·공공디자인·리빙 프로덕트</div>
+      <div class="prof-contact">
+        <span class="item">📍 다빈치관 532호</span>
+        <span class="item">✉ lsj6732@seoultech.ac.kr</span>
+      </div>
+    </div>
+
+    <!-- 2. 김원섭 -->
+    <div class="prof-card">
+      <div class="prof-header">
+        <div class="prof-name">김원섭</div>
+        <div class="prof-major">제품 인터랙션 디자인</div>
+      </div>
+      <div class="prof-tagline">공학과 디자인의 융합, 움직이는 제품·로봇·인터랙션 분야 연구.</div>
+      <div class="prof-keywords">
+        <span class="keyword">로봇</span><span class="keyword">인터랙션</span><span class="keyword">키네틱</span><span class="keyword">오토마타</span><span class="keyword">헬스케어</span><span class="keyword">유니버설</span>
+      </div>
+      <div class="prof-lab"><b>로봇 & 인터랙션디자인 랩</b> · KAIST 공학박사 출신, 디자인 저서 6권</div>
+      <div class="prof-contact">
+        <span class="item">📍 다빈치관 530호</span>
+        <span class="item">✉ wskim@seoultech.ac.kr</span>
+      </div>
+    </div>
+
+    <!-- 3. 김상규 -->
+    <div class="prof-card">
+      <div class="prof-header">
+        <div class="prof-name">김상규</div>
+        <div class="prof-major">제품문화컨텐츠 디자인</div>
+      </div>
+      <div class="prof-tagline">디자인을 비평·아카이브·문화의 관점에서 탐구. 한국 디자인의 역사와 미래.</div>
+      <div class="prof-keywords">
+        <span class="keyword">디자인 문화</span><span class="keyword">비평</span><span class="keyword">큐레이팅</span><span class="keyword">아카이브</span><span class="keyword">가구</span><span class="keyword">K-디자인</span>
+      </div>
+      <div class="prof-lab"><b>자율디자인랩</b> · 디자인 미술관 큐레이터 출신, 저서 30권+</div>
+      <div class="prof-contact">
+        <span class="item">📍 다빈치관 531호</span>
+        <span class="item">✉ ksk2010@seoultech.ac.kr</span>
+      </div>
+    </div>
+
+    <!-- 4. 최정민 -->
+    <div class="prof-card">
+      <div class="prof-header">
+        <div class="prof-name">최정민</div>
+        <div class="prof-major">제품 UX디자인</div>
+      </div>
+      <div class="prof-tagline">AI 시대의 사용자 경험. 스마트 제품·서비스 UX 방법론 연구.</div>
+      <div class="prof-keywords">
+        <span class="keyword">UX</span><span class="keyword">AI 에이전트</span><span class="keyword">스마트 스피커</span><span class="keyword">메타버스</span><span class="keyword">AR/VR</span><span class="keyword">헬스케어</span>
+      </div>
+      <div class="prof-lab"><b>제품 UX 디자인 랩</b> · 美 IIT Institute of Design 박사, LG전자 출신</div>
+      <div class="prof-contact">
+        <span class="item">📍 다빈치관 529호</span>
+        <span class="item">✉ jmchoi@seoultech.ac.kr</span>
+      </div>
+    </div>
+
+    <!-- 5. 최웅 -->
+    <div class="prof-card">
+      <div class="prof-header">
+        <div class="prof-name">최웅</div>
+        <div class="prof-major">제품조형디자인</div>
+      </div>
+      <div class="prof-tagline">알고리즘·제너러티브 디자인, 3D 프린팅, CAD 기반의 새로운 제품 조형.</div>
+      <div class="prof-keywords">
+        <span class="keyword">알고리즘 디자인</span><span class="keyword">패러매트릭</span><span class="keyword">제너러티브</span><span class="keyword">3D 프린팅</span><span class="keyword">CAD</span>
+      </div>
+      <div class="prof-lab"><b>미래조형디자인 스튜디오</b> · EPDA Top Winner, IDA Gold, LG전자 출신</div>
+      <div class="prof-contact">
+        <span class="item">📍 다빈치관 528호</span>
+        <span class="item">✉ woongchoi@seoultech.ac.kr</span>
+      </div>
+    </div>
+
+    <!-- 6. 이영은 -->
+    <div class="prof-card">
+      <div class="prof-header">
+        <div class="prof-name">이영은</div>
+        <div class="prof-major">제품 리빙 디자인</div>
+      </div>
+      <div class="prof-tagline">일상의 가구·리빙 제품, VR 활용 입체조형, 친환경 디자인 연구.</div>
+      <div class="prof-keywords">
+        <span class="keyword">리빙</span><span class="keyword">가구</span><span class="keyword">VR 조형</span><span class="keyword">친환경</span><span class="keyword">테이블·선반</span>
+      </div>
+      <div class="prof-lab"><b>Living Design Studio</b> · 美 Cranbrook 석사, 현대카드 UX&Design Lab 출신</div>
+      <div class="prof-contact">
+        <span class="item">📍 다빈치관 527호</span>
+        <span class="item">✉ yelee@seoultech.ac.kr</span>
+      </div>
+    </div>
+
+    <!-- 7. 민찬욱 -->
+    <div class="prof-card">
+      <div class="prof-header">
+        <div class="prof-name">민찬욱</div>
+        <div class="prof-major">뉴미디어디자인</div>
+      </div>
+      <div class="prof-tagline">코드·센서·기계로 만드는 뉴미디어 아트와 기술융합 디자인.</div>
+      <div class="prof-keywords">
+        <span class="keyword">뉴미디어</span><span class="keyword">인터랙티브 아트</span><span class="keyword">피지컬 컴퓨팅</span><span class="keyword">AI 디자인</span><span class="keyword">크리에이티브 코딩</span>
+      </div>
+      <div class="prof-lab">NYU ITP 석사 · 동국대 전자공학(공학+예술 융합) · 현역 뉴미디어아티스트</div>
+      <div class="prof-contact">
+        <span class="item">📍 어의관 615호</span>
+        <span class="item">✉ chanwook.min@seoultech.ac.kr</span>
+      </div>
+    </div>
+
+    <!-- 8. 고성찬 -->
+    <div class="prof-card">
+      <div class="prof-header">
+        <div class="prof-name">고성찬</div>
+        <div class="prof-major">제품 AI 디자인</div>
+      </div>
+      <div class="prof-tagline">삼성리서치 16년 산업현장 경험 + 생성형 AI·로봇 디자인의 최전선.</div>
+      <div class="prof-keywords">
+        <span class="keyword">AI 디자인</span><span class="keyword">생성형 AI</span><span class="keyword">로봇</span><span class="keyword">웨어러블</span><span class="keyword">삼성 제품</span>
+      </div>
+      <div class="prof-lab">삼성전자 삼성리서치 16년 · 2025 대한민국디자인전람회 대통령상</div>
+      <div class="prof-contact">
+        <span class="item">📍 어의관 603호</span>
+        <span class="item">✉ sungchan@seoultech.ac.kr</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    💡 <b>지도교수 선택 팁</b> — 입학 전 관심 있는 교수님 한두 분께 메일로 연구실 방문을 요청해 보세요. 본인의 관심 주제와 교수님의 최근 연구가 어떻게 연결되는지 미리 확인하면 입학 후 연구 방향 설정이 훨씬 수월합니다.
+  </div>
+
+  <div class="footer">
+    <div>출처: 서울과학기술대학교 일반대학원 산업디자인학과 (gsp.seoultech.ac.kr) · 2026년 5월 기준</div>
+    <div>BEAR+ 프로그램 예비대학원생 설명회 자료</div>
+  </div>
+
+</body>
+</html>
